@@ -1,8 +1,68 @@
+<div id="wrapper">
+    <div id="information">
+        <div class="item">
+            <label>Username : </label>
+            <input type="text" id="username" placeholder="Enter username...">
+        </div>
+        <div class="item">
+            <label>Email : </label>
+            <input type="email" id="email" placeholder="Enter email...">
+        </div>
+        <div class="item">
+            <label>Phone number : </label>
+            <input type="tel" id="phone" placeholder="Enter phone number...">
+        </div>
+        <div class="item">
+            <button id="btnRegister">Register</button>
+        </div>
+    </div>
+    <div id="listUsers">
+        <h3>Danh sach hoc vien</h3>
+        <div id="list">
+        </div>
+    </div>
+    <style>
+        #wrapper {
+            width: 400px;
+            margin: 10px auto;
+        }
 
-<h1>Hi</h1>
-<p></p>
-<button id="btn">
-    Submit
-</button>
+        #information input {
+            display: block;
+        }
+
+        .item {
+            margin: 5px 0;
+        }
+
+        .item input {
+            padding: 8px 10px;
+            width: 80%;
+            outline: none;
+            border: 1px solid gray;
+            border-radius: 3px;
+        }
+
+        .item button {
+            padding: 5px 7px;
+            cursor: pointer;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        #item {
+            border: 1px solid gray;
+
+        }
+
+        .row {
+            padding: 3px 20px;
+        }
+    </style>
+</div>
 <script src="socket.io/socket.io.js"></script>
 <script src="../javascript/index.js"></script>

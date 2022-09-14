@@ -22,11 +22,32 @@ const { Server } = require('socket.io');
 const io = new Server(server);
 connectDB();
 routes(app);
+let users = [];
+function User(username, email, phone) {
+    this.username = username;
+    this.email = email;
+    this.phone = phone;
+}
 io.on('connection', (socket) => {
     console.log('User connected');
     console.log(socket.id);
+    socket.on('register', (user) => {
+        const newUser = new User(user.username, user.email, user.phone);
+        const data = users.filter((user) => user.email === newUser.email);
+        if (data.length) {
+            socket.emit('register-failure');
+            return;
+        }
+        users.push(newUser);
+        socket.username = newUser.username;
+        socket.emit('register-sucess', newUser);
+        io.sockets.emit('send-users', users);
+    });
     socket.on('disconnect', () => {
+        socket.broadcast.emit('user_disconnected', socket.username);
         console.log('User disconnected');
+        users.pop();
+        io.sockets.emit('send-users', users);
     });
 });
 server.listen(port, () =>
